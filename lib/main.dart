@@ -16,12 +16,6 @@ Future<void> main() async {
   final firstCamera = cameras.first;
 
   runApp(
-    GetMaterialApp(
-        darkTheme: ThemeData(
-          brightness: Brightness.dark,
-          primaryColor: Color(0xFFFF00FF),
-        ),
-        theme: ThemeData.dark(),
-        home: Login(camera: firstCamera)),
+    GetMaterialApp(theme: ThemeData.light(), home: Login(camera: firstCamera)),
   );
 }

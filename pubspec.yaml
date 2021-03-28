@@ -28,6 +28,7 @@ dependencies:
   flutter_spinkit: ^5.0.0
   get: ^4.1.1
   google_fonts: ^2.0.0
+  graphql: ^4.0.0-beta
   path: null
   path_provider: null
   tflite: ^1.1.1

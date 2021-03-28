@@ -65,7 +65,7 @@ class Login extends StatelessWidget {
                     height: 60,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.blue[700]),
+                        color: Colors.pink[700]),
                     child: TextButton(
                       onPressed: () {
                         Get.to(() => Registerscreen(),
