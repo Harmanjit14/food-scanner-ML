@@ -1,11 +1,12 @@
-
+import 'package:FlutterMobilenet/widgets/profile.dart';
+import 'package:graphql/client.dart';
 
 String token = "";
 MyProfile profile = new MyProfile();
 
 Future<bool> login(String username, String password) async {
   HttpLink _httpLink = HttpLink(
-    'https://huddle-backend.herokuapp.com/graphql/',
+    'https://veehacks-backend.herokuapp.com/graphql/',
   );
 
   AuthLink _authLink = AuthLink(
@@ -39,14 +40,13 @@ Future<bool> login(String username, String password) async {
   }
   token = data.data["tokenAuth"]["token"];
   await getProfile();
-  await getChats();
   return true;
 }
 
 Future<bool> register(String username, String email, String password,
     String name, String gender, String city, String state) async {
   HttpLink _httpLink = HttpLink(
-    'https://huddle-backend.herokuapp.com/graphql/',
+    'https://veehacks-backend.herokuapp.com/graphql/',
   );
 
   AuthLink _authLink = AuthLink(
@@ -85,7 +85,7 @@ Future<bool> register(String username, String email, String password,
 
 Future<bool> getProfile() async {
   HttpLink _httpLink = HttpLink(
-    'https://huddle-backend.herokuapp.com/graphql/',
+    'https://veehacks-backend.herokuapp.com/graphql/',
   );
 
   AuthLink _authLink = AuthLink(
@@ -103,17 +103,13 @@ Future<bool> getProfile() async {
   
 {
   me{
-    user{
-      email
-    }
-    city
     name
-    gender
-    city
-    state
-    country
-    id
-    image
+    age
+    weight
+    height
+    bmi
+    maxScore
+    gameLife
   }
 }
 """;
@@ -129,12 +125,11 @@ Future<bool> getProfile() async {
   }
   var profiledata = data.data;
   profile.name.value = profiledata["me"]["name"];
-  profile.email.value = profiledata["me"]["user"]["email"];
-  profile.city.value = profiledata["me"]["city"];
-  profile.isFemale.value = (profiledata["me"]["gender"] == "F") ? true : false;
-  profile.state.value = profiledata["me"]["state"];
-  profile.country.value = profiledata["me"]["country"];
-  profile.id.value = profiledata["me"]["id"];
-  profile.image.value = profiledata["me"]["image"];
+  profile.age.value = profiledata["me"]["age"];
+  profile.weight.value = profiledata["me"]["weight"];
+  profile.height.value = profiledata["me"]["height"];
+  profile.bmi.value = profiledata["me"]["bmi"];
+  profile.score.value = profiledata["me"]["maxScore"];
+  profile.life.value = profiledata["me"]["gameLife"];
   return true;
 }
