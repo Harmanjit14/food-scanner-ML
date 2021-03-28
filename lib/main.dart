@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:FlutterMobilenet/widgets/startScreen.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 Future<void> main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
@@ -15,12 +16,12 @@ Future<void> main() async {
   final firstCamera = cameras.first;
 
   runApp(
-    MaterialApp(
+    GetMaterialApp(
         darkTheme: ThemeData(
           brightness: Brightness.dark,
           primaryColor: Color(0xFFFF00FF),
         ),
         theme: ThemeData.dark(),
-        home: LandingScreen(camera: firstCamera)),
+        home: Login(camera: firstCamera)),
   );
 }
