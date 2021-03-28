@@ -128,7 +128,6 @@ Future<bool> getProfile() async {
   profile.age.value = profiledata["me"]["age"];
   profile.weight.value = profiledata["me"]["weight"];
   profile.height.value = profiledata["me"]["height"];
-  profile.bmi.value = profiledata["me"]["bmi"];
   profile.score.value = profiledata["me"]["maxScore"];
   profile.life.value = profiledata["me"]["gameLife"];
   return true;

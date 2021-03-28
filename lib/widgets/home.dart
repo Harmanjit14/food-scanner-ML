@@ -3,16 +3,11 @@ import 'package:FlutterMobilenet/services/tensorflow-service.dart';
 import 'package:FlutterMobilenet/widgets/recognition.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import '../main.dart';
 import 'camera-header.dart';
 import 'camera-screen.dart';
 
 class Home extends StatefulWidget {
-  final CameraDescription camera;
-
-  const Home({
-    Key key,
-    @required this.camera,
-  }) : super(key: key);
 
   @override
   HomeState createState() => HomeState();
@@ -42,7 +37,7 @@ class HomeState extends State<Home> with TickerProviderStateMixin, WidgetsBindin
       return;
     }
     if (_initializeControllerFuture == null) {
-      _initializeControllerFuture = _cameraService.startService(widget.camera).then((value) async {
+      _initializeControllerFuture = _cameraService.startService(firstCamera).then((value) async {
         await _tensorflowService.loadModel();
         startRecognitions();
       });

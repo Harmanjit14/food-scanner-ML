@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:FlutterMobilenet/widgets/auth.dart';
+import 'package:FlutterMobilenet/widgets/landing.dart';
 import 'package:FlutterMobilenet/widgets/startScreen.dart';
 import 'package:FlutterMobilenet/widgets/text.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +13,6 @@ class ButtonLogin extends GetxController {
 
 // ignore: must_be_immutable
 class LoginSreen extends StatefulWidget {
-  final camera;
-
-  const LoginSreen({Key key, this.camera}) : super(key: key);
   @override
   _LoginSreenState createState() => _LoginSreenState();
 }
@@ -233,14 +231,16 @@ class _LoginSreenState extends State<LoginSreen> {
                           if (await login(name, city)) {
                             btnState.buttonState.value = 2;
                             Timer(Duration(seconds: 1), () {
-                              Get.offAll(() => MainLanding());
+                              Get.offAll(() => MainScreen(
+                                   
+                                  ));
                             });
                           } else {
                             btnState.buttonState.value = 3;
                             Timer(Duration(seconds: 1), () {
                               btnState.buttonState.value = 0;
                             });
-                          },
+                          }
                         }
                       },
                       child: Container(
