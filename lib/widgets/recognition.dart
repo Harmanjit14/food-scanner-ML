@@ -54,17 +54,26 @@ class _RecognitionState extends State<Recognition> {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        height: 200,
+        height: 400,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Container(
+              height: 60,
+              child: ElevatedButton(
+                onPressed: () {
+                  
+                },
+                child: Text("Add my life"),
+              ),
+            ),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
                   color: Color(0xFF120320),
                 ),
-                height: 200,
+                height: 300,
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: widget.ready
@@ -93,7 +102,8 @@ class _RecognitionState extends State<Recognition> {
         children: <Widget>[
           Text(
             "Recognitions",
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w300,color: Colors.white),
+            style: TextStyle(
+                fontSize: 26, fontWeight: FontWeight.w300, color: Colors.white),
           ),
         ],
       ),

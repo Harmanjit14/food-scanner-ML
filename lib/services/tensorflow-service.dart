@@ -24,7 +24,8 @@ class TensorflowService {
     try {
       this._recognitionController.add(null);
       await Tflite.loadModel(
-        model: "assets/foods.tflite",
+        model: "assets/mobilenet_v1_1.0_224.tflite",
+        labels: "assets/labels.txt",
       );
       _modelLoaded = true;
     } catch (e) {
