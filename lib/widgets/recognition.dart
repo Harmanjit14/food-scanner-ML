@@ -35,7 +35,8 @@ class _RecognitionState extends State<Recognition> {
 
   _startRecognitionStreaming() {
     if (_streamSubscription == null) {
-      _streamSubscription = _tensorflowService.recognitionStream.listen((recognition) {
+      _streamSubscription =
+          _tensorflowService.recognitionStream.listen((recognition) {
         if (recognition != null) {
           // rebuilds the screen with the new recognitions
           setState(() {
@@ -92,7 +93,7 @@ class _RecognitionState extends State<Recognition> {
         children: <Widget>[
           Text(
             "Recognitions",
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w300),
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w300,color: Colors.white),
           ),
         ],
       ),
@@ -124,6 +125,9 @@ class _RecognitionState extends State<Recognition> {
                         _currentRecognition[index]['label'],
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     Container(
@@ -136,9 +140,14 @@ class _RecognitionState extends State<Recognition> {
                     Container(
                       width: _labelConfidence,
                       child: Text(
-                        (_currentRecognition[index]['confidence'] * 100).toStringAsFixed(0) + '%',
+                        (_currentRecognition[index]['confidence'] * 100)
+                                .toStringAsFixed(0) +
+                            '%',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     )
                   ],
