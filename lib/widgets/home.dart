@@ -1,19 +1,22 @@
 import 'package:FlutterMobilenet/services/camera-service.dart';
 import 'package:FlutterMobilenet/services/tensorflow-service.dart';
+import 'package:FlutterMobilenet/widgets/auth.dart';
+import 'package:FlutterMobilenet/widgets/landing.dart';
 import 'package:FlutterMobilenet/widgets/recognition.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../main.dart';
 import 'camera-header.dart';
 import 'camera-screen.dart';
 
 class Home extends StatefulWidget {
-
   @override
   HomeState createState() => HomeState();
 }
 
-class HomeState extends State<Home> with TickerProviderStateMixin, WidgetsBindingObserver {
+class HomeState extends State<Home>
+    with TickerProviderStateMixin, WidgetsBindingObserver {
   // Services injection
   TensorflowService _tensorflowService = TensorflowService();
   CameraService _cameraService = CameraService();
@@ -37,7 +40,8 @@ class HomeState extends State<Home> with TickerProviderStateMixin, WidgetsBindin
       return;
     }
     if (_initializeControllerFuture == null) {
-      _initializeControllerFuture = _cameraService.startService(firstCamera).then((value) async {
+      _initializeControllerFuture =
+          _cameraService.startService(firstCamera).then((value) async {
         await _tensorflowService.loadModel();
         startRecognitions();
       });
@@ -65,8 +69,18 @@ class HomeState extends State<Home> with TickerProviderStateMixin, WidgetsBindin
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.done,
+          size: 30,
+        ),
+        onPressed: () async {
+          await updateData();
+          await updateScore();
+          Get.offAll(() => MainScreen());
+        },
+      ),
       // Wait until the controller is initialized before displaying the
       // camera preview. Use a FutureBuilder to display a loading spinner
       // until the controller has finished initializing.
@@ -83,7 +97,6 @@ class HomeState extends State<Home> with TickerProviderStateMixin, WidgetsBindin
                 ),
 
                 // shows the header with the icon
-                CameraHeader(),
 
                 // shows the recognition on the bottom
                 Recognition(

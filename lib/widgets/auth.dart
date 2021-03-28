@@ -132,3 +132,77 @@ Future<bool> getProfile() async {
   profile.life.value = profiledata["me"]["gameLife"];
   return true;
 }
+
+Future<bool> updateScore() async {
+  HttpLink _httpLink = HttpLink(
+    'https://veehacks-backend.herokuapp.com/graphql/',
+  );
+
+  AuthLink _authLink = AuthLink(
+    getToken: () async => 'JWT $token',
+  );
+
+  Link _link = _authLink.concat(_httpLink);
+  GraphQLClient client = GraphQLClient(
+    /// **NOTE** The default store is the InMemoryStore, which does NOT persist to disk
+    cache: GraphQLCache(),
+    link: _link,
+  );
+
+  String mutationString = """
+ mutation{
+  addNutrition(carbs:30,fats:10,vitamins:0,protein:14,foodName:"Sandwich",minerals:0){
+    __typename
+  }
+}
+""";
+
+  MutationOptions options = MutationOptions(
+    document: gql(mutationString),
+  );
+
+  QueryResult data = await client.mutate(options);
+  if (data.hasException) {
+    print(data.exception.toString());
+    return false;
+  }
+
+  return true;
+}
+
+Future<bool> updateData() async {
+  HttpLink _httpLink = HttpLink(
+    'https://veehacks-backend.herokuapp.com/graphql/',
+  );
+
+  AuthLink _authLink = AuthLink(
+    getToken: () async => 'JWT $token',
+  );
+
+  Link _link = _authLink.concat(_httpLink);
+  GraphQLClient client = GraphQLClient(
+    /// **NOTE** The default store is the InMemoryStore, which does NOT persist to disk
+    cache: GraphQLCache(),
+    link: _link,
+  );
+  profile.life.value += 1;
+  String mutationString = """
+mutation{
+  updateUser(life:${profile.life.value},score:${profile.score.value}){
+    __typename
+  }
+}
+""";
+
+  MutationOptions options = MutationOptions(
+    document: gql(mutationString),
+  );
+
+  QueryResult data = await client.mutate(options);
+  if (data.hasException) {
+    print(data.exception.toString());
+    return false;
+  }
+
+  return true;
+}

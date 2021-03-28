@@ -54,20 +54,12 @@ class _RecognitionState extends State<Recognition> {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        height: 400,
+        height: 300,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Container(
-              height: 60,
-              child: ElevatedButton(
-                onPressed: () {
-                  
-                },
-                child: Text("Add my life"),
-              ),
-            ),
+           
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
